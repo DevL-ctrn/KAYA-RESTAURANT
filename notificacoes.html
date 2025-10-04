@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard do Restaurante</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+    body {
+      background-color: #f4f5f7;
+    }
+
+ 
+    .pc-layout {
+      display: flex;
+      height: 100vh;
+    }
+
+    .pc-layout .sidebar {
+      width: 240px;
+      background-color: #d43f20;
+      color: white;
+      padding: 20px 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .pc-layout .sidebar h2 {
+      font-size: 20px;
+      margin-bottom: 24px;
+      font-weight: 700;
+    }
+
+    .pc-layout .sidebar a {
+      color: #cbd5e1;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      transition: background 0.3s ease;
+    }
+
+    .pc-layout .sidebar a:hover {
+      background-color: black;
+      color: white;
+    }
+
+    .pc-layout .main {
+      flex: 1;
+      padding: 30px;
+      overflow-y: auto;
+    }
+
+    .pc-layout .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .pc-layout .header h1 {
+      font-size: 26px;
+      font-weight: 700;
+    }
+
+    .logout {
+      background-color: #d43f20;
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      margin-bottom: 30px;
+    }
+
+    .card {
+      background-color: white;
+      flex: 1 1 250px;
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .card h3 {
+      font-size: 16px;
+      color: #6b7280;
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      font-size: 22px;
+      font-weight: 700;
+      color: #1f2937;
+    }
+
+    .section {
+      background-color: white;
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      margin-bottom: 30px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+    }
+
+    th, td {
+      padding: 14px;
+      text-align: left;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    th {
+      background-color: #f9fafb;
+      font-weight: 600;
+    }
+
+    .status-confirmado {
+      color: green;
+      font-weight: bold;
+    }
+
+    .status-pendente {
+      color: orange;
+      font-weight: bold;
+    }
+       .status-cancelado {
+      color: red;
+      font-weight: bold;
+    }
+
+    .footer-note {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #6b7280;
+    }
+
+   
+    .mobile-layout {
+      display: none;
+      background-color: #f4f5f7;
+    }
+
+    .mobile-layout .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      background-color: #d43f20;
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .menu-toggle {
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: white;
+      cursor: pointer;
+    }
+
+    .mobile-layout .header h1 {
+      font-size: 18px;
+    }
+
+    .mobile-layout .logout {
+      background-color: #d43f20;
+      color: white;
+      padding: 4px 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    .mobile-layout .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #d43f20;
+      color: white;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+      z-index: 100;
+    }
+
+    .mobile-layout .sidebar.open {
+      transform: translateX(0);
+    }
+
+    .mobile-layout .sidebar h2 {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+
+    .mobile-layout .sidebar a {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 16px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .close-menu {
+      align-self: flex-end;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 28px;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+
+    .mobile-layout .main {
+      padding: 16px;
+    }
+
+    .
+   
+
+    .mobile-layout .card h3 {
+      font-size: 14px;
+      color: #6b7280;
+    }
+
+    .mobile-layout .card p {
+      font-size: 20px;
+      font-weight: 700;
+      margin-top: 4px;
+    }
+
+    .mobile-layout .section {
+      background-color: white;
+      padding: 16px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      margin-bottom: 20px;
+    }
+
+    .mobile-layout table {
+      width: 100%;
+      border-collapse: collapse;
+      display: block;
+      overflow-x: auto;
+    }
+
+    .mobile-layout th, .mobile-layout td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #e5e7eb;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .mobile-layout th {
+      background-color: #f9fafb;
+    }
+
+    .mobile-layout .footer-note {
+      text-align: center;
+      font-size: 13px;
+      color: #6b7280;
+      margin-top: 20px;
+    }
+
+   .foto-perf {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .foto-perf img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--cor-primaria);
+    }
+    @media (max-width: 768px) {
+      .pc-layout { display: none; }
+      .mobile-layout { display: block; }
+    }
+
+     .notification {
+      background: white;
+      padding: 1rem 1.5rem;
+      margin-bottom: 1rem;
+      border-left: 6px solid #ff4c29;
+      border-radius: 8px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+    .notification h4 {
+      margin: 0 0 0.5rem;
+      color: #ff4c29;
+    }
+    .notification p {
+      margin: 0;
+      font-size: 0.95rem;
+    }
+   
+  </style>
+</head>
+<body>
+  
+  <div class="pc-layout">
+    <aside class="sidebar">
+         <div class="foto-perf">
+      <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1470&q=80" alt="Foto de Perfil" />
+      <br>
+      
+    </div>
+      <h2><i class="fas fa-bread-slice" style="text-align:center;"></i> Meu Restaurante</h2>
+      <a href="dashboard.html"><i class="fas fa-home"></i> Painel Principal</a>
+      <a href="menupedidos.html"><i class="fas fa-list"></i> Menu de Pedidos</a>
+      <a href="pedidos.html"><i class="fas fa-users"></i> Pedidos dos Clientes</a>
+      <a href="cronometro.html"><i class="fas fa-clock"></i> Cronômetro</a>
+      <a href="notificacoes.html"><i class="fas fa-clock"></i> Notificações</a>
+      <a href="pagamento.html"><i class="fas fa-money-bill-wave"></i> Pagamentos</a>
+      <a href="configuracoes.html"><i class="fas fa-cog"></i> Configurações</a>
+    </aside>
+    <main class="main">
+      <div class="header">
+        <h1>Painel do Restaurante</h1>
+        <button class="logout">Terminar Sessão</button>
+      </div>
+      <div class="cont">
+  <div class="notification">
+    <h4>Pedido confirmado</h4>
+    <p>O cliente Alfredo Jorge acabou de confirmar o seu pedido.</p>
+  </div>
+  <div class="notification">
+    <h4> Atraso no pedido</h4>
+    <p>O pedido da Ana Maria irá atrasar mais 10 minutos.</p>
+  </div>
+  <div class="notification">
+    <h4> Reagendamento do pedido</h4>
+    <p>Acabou de reagendar o pedido do Alfredo Matheus para às 13:00</p>
+  </div>
+   <div class="notification">
+    <h4> Cancelamento do pedido</h4>
+    <p> A Joana Freitas acaba de cancelar o seu pedido.</p>
+  </div>
+</div>
+
+      <p class="footer-note">Actualizado em tempo real | KayaRestaurant 2025</p>
+    </main>
+  </div>
+
+  
+  <div class="mobile-layout">
+    <aside class="sidebar" id="sidebar">
+      <button class="close-menu" onclick="toggleSidebar()">&times;</button>
+      <h2><i class="fas fa-bread-slice"></i> Minha Padaria</h2>
+      <a href="#">Painel Principal</a>
+      <a href="#">Menu de Pedidos</a>
+      <a href="#">Pedidos dos Clientes</a>
+      <a href="#">Cronômetro</a>
+      <a href="#">Pagamentos</a>
+      <a href="#">Configurações</a>
+    </aside>
+    <div class="header">
+      <button class="menu-toggle" onclick="toggleSidebar()">&#9776;</button>
+      <h1>Painel da Padaria</h1>
+      <button class="logout">Terminar Sessão</button>
+    </div>
+    <main class="main">
+      <div class="cont">
+   <div class="notification">
+    <h4>Pedido confirmado</h4>
+    <p>O cliente Alfredo Jorge acabou de confirmar o seu pedido.</p>
+  </div>
+  <div class="notification">
+    <h4> Atraso no pedido</h4>
+    <p>O pedido da Ana Maria irá atrasar mais 10 minutos.</p>
+  </div>
+  <div class="notification">
+    <h4> Reagendamento do pedido</h4>
+    <p>Acabou de reagendar o pedido do Alfredo Matheus para às 13:00</p>
+  </div>
+   <div class="notification">
+    <h4> Cancelamento do pedido</h4>
+    <p> A Joana Freitas acaba de cancelar o seu pedido.</p>
+  </div>
+</div>
+
+      <p class="footer-note">Actualizado em tempo real | KayaRestaurant 2025 </p>
+    </main>
+  </div>
+
+  <script>
+    function toggleSidebar() {
+      document.getElementById('sidebar').classList.toggle('open');
+    }
+  </script>
+</body>
+</html>

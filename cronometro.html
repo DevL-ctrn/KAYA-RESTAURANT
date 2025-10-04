@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Definir Tempo de Preparo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      background-color: #f3f4f6;
+      color: #1f2937;
+    }
+    .container {
+      max-width: 800px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid #e5e7eb;
+      text-align: left;
+    }
+    th {
+      background-color: #f9fafb;
+    }
+    .categoria {
+      background-color: #d43f20;
+      font-weight: bold;
+    }
+    input[type="number"] {
+      width: 80px;
+      padding: 6px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+    }
+    button {
+      background-color: #d43f20;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #2563eb;
+    }
+    .success-message {
+      display: none;
+      background-color: #dcfce7;
+      color: #15803d;
+      padding: 10px 16px;
+      margin-top: 20px;
+      border-radius: 6px;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Definir Tempo de Preparo</h1>
+    <form id="tempo-form">
+      <table>
+        <thead>
+          <tr>
+            <th>Categoria</th>
+            <th>Tempo (min)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Categoria: Pães -->
+          <tr class="categoria"><td colspan="2">Pizzas</td></tr>
+          <tr>
+            <td>Pizza Mexicana</td>
+            <td><input type="number" name="fresco" value="20" min="1"></td>
+          </tr>
+          <tr>
+            <td>Pizza BBQ</td>
+            <td><input type="number" name="torrado" value="10" min="1"></td>
+          </tr>
+          <tr>
+            <td>Pizza de Ananás</td>
+            <td><input type="number" name="quente" value="30" min="1"></td>
+          </tr>
+
+          <!-- Categoria: Bolos -->
+          <tr class="categoria"><td colspan="2">Sobremesas</td></tr>
+          <tr>
+            <td>Bolo de Chocolate</td>
+            <td><input type="number" name="bolo_chocolate" value="45" min="1"></td>
+          </tr>
+          <tr>
+            <td>Bolo de Cenoura</td>
+            <td><input type="number" name="bolo_cenoura" value="40" min="1"></td>
+          </tr>
+
+          <!-- Categoria: Outros -->
+          <tr class="categoria"><td colspan="2">Bebidas</td></tr>
+          <tr>
+            <td>Coca-Cola</td>
+            <td><input type="number" name="bolacha" value="25" min="1"></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <button type="submit">Guardar Tempos</button>
+      <div class="success-message" id="success-msg">Tempos salvos com sucesso!</div>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("tempo-form").addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const dados = {
+        fresco: parseInt(e.target.fresco.value),
+        torrado: parseInt(e.target.torrado.value),
+        quente: parseInt(e.target.quente.value),
+        bolo_chocolate: parseInt(e.target.bolo_chocolate.value),
+        bolo_cenoura: parseInt(e.target.bolo_cenoura.value),
+        bolacha: parseInt(e.target.bolacha.value)
+      };
+
+      try {
+        await fetch("https://teuservidor.com/api/tempos", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(dados),
+        });
+        document.getElementById("success-msg").style.display = "block";
+      } catch (error) {
+        alert("Erro ao salvar os tempos. Tente novamente mais tarde.");
+      }
+    });
+  </script>
+</body>
+</html>

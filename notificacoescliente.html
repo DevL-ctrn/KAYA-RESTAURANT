@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Notificações - Kaya Restaurant</title>
+ <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <style>
+     /* Reset & base */
+    /* Reset & base */
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f9f9f9;
+      margin: 0;
+      padding: 1rem;
+      color: #333;
+    }
+
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 70px;
+      background: #ff4c29;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 2rem;
+      z-index: 1100;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 1.6rem;
+      letter-spacing: 3px;
+      cursor: pointer;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    nav > * {
+      cursor: pointer;
+      position: relative;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    nav > *:hover {
+      color: #ffeae0;
+    }
+
+    .search-contain {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-contain input {
+      padding: 0.5rem 2.5rem 0.5rem 1rem;
+      border-radius: 25px;
+      border: none;
+      outline: none;
+      font-size: 0.95rem;
+      transition: box-shadow 0.3s ease;
+      width: 280px;
+    }
+
+    .search-contain input:focus {
+      box-shadow: 0 0 8px #ff4c29aa;
+    }
+
+    .search-contain svg {
+      position: absolute;
+      right: 10px;
+      width: 18px;
+      height: 18px;
+      fill: #ff4c29;
+      pointer-events: none;
+    }
+
+    .icon-button {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: orangered;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .perfil-contain {
+      max-width: 800px;
+      margin: 120px auto 0;
+      padding: 1rem;
+    }
+
+    .perfil-header {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+
+     .cont {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+     .carrinho-item img {
+      width: 160px;
+      height: 190px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    .topbar h1 {
+    margin: 0;
+    font-size: 20px;
+  }
+
+  .topbar {
+    background-color: #222;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* espaço entre logo e botão */
+  }
+
+  .icone{
+    font-size: 16px;
+  }
+  .menu-botn {
+    font-size: 28px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  /* Sidebar (menu lateral) - começa escondido à esquerda */
+  .sidebar {
+    height: 100vh;
+    width: 250px;
+    background-color: #222; ;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: -250px; /* escondido à esquerda */
+    transition: left 0.3s ease;
+    padding-top: 60px; /* espaço para topbar */
+    box-sizing: border-box;
+    z-index: 1000;
+  
+  }
+
+  /* Quando ativo, fica visível */
+  .sidebar.active {
+    left: 0;
+  }
+
+  /* Itens do menu com ícones */
+  .sidebar a {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+    border-bottom: 1px solid #444;
+  }
+  .sidebar a:hover {
+    background-color: #d43f20;
+  }
+  /* Ícones simples com emoji só pra demo */
+  .sidebar a .icon {
+    margin-right: 15px;
+    font-size: 22px;
+  }
+
+  .sidebar.active ~ .contentp {
+    margin-right: 250px;
+  }
+ 
+  .sidebar ul li:hover a.icone,
+  .sidebar ul li:hover a.texto{
+    color: var(--bg);
+
+  }
+  
+    .texto{
+    font-size: 19px;
+    color:#d43f20;
+    }
+
+  .logotipo {
+      display:flex; flex-direction:column;
+      justify-content: center;
+      align-items: center;
+    }
+  
+ .icon-button,
+    .search-icon-button {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: orangered;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+     .search-contain input {
+        width: 140px;
+         padding: 0.5rem 2.5rem 0.5rem 1rem;
+      border-radius: 25px;
+      border: none;
+      outline: none;
+      font-size: 0.95rem;
+      transition: box-shadow 0.3s ease;
+      width: 200px;
+      }
+       .search-contain {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+   
+      nav {
+        position: fixed;
+        top: 70px;
+        right: -100%;
+        height: calc(100vh - 70px);
+        width: 220px;
+        background: #ff4c29;
+        flex-direction: column;
+        padding: 2rem 1rem;
+        gap: 1.8rem;
+        transition: right 0.35s ease;
+        z-index: 1200;
+      }
+      nav.active {
+        right: 0;
+      }
+      .menu-toggle {
+        display: flex;
+        position: absolute;
+        right: 20px;
+        top: 15px;
+      }
+    
+    }
+
+    /* Esconde o botão no desktop e sidebar também */
+  @media (min-width: 769px) {
+    .menu-botn {
+      display: none;
+    }
+    .sidebar {
+      display: none;
+    }
+}
+    .notification {
+      background: white;
+      padding: 1rem 1.5rem;
+      margin-bottom: 1rem;
+      border-left: 6px solid #ff4c29;
+      border-radius: 8px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+    .notification h4 {
+      margin: 0 0 0.5rem;
+      color: #ff4c29;
+    }
+    .notification p {
+      margin: 0;
+      font-size: 0.95rem;
+    }
+    
+  </style>
+</head>
+<body>
+
+ <div class="top-bar">
+    <header>
+  <div class="rand" style ="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size:30px;"><b>Kaya Restaurant</b></div>
+  <div class="menu-botn" id="menu-botn">&#9776;</div> <!-- botão à direita -->
+
+  <nav aria-label="Menu principal">
+    <div class="search-contain">
+      <input type="search" placeholder="Pesquisar pratos ou restaurantes..." aria-label="Pesquisar" />
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M21 21l-6-6m2-5a7 7 0 1 1-14 0 7 7 0 0 1 14 0z" stroke="#ff4c29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+    </div>
+ <div class="icon-button" title="Login"><i class="fas fa-user"></i></div>
+    <div class="icon-button" title="Fazer Compras"><i class="fas fa-shopping-bag"></i></div>
+  </nav>
+
+</div>
+      <div class="sidebar" id="sidebar"> <br>
+    <li class ="logotipo">
+      
+        <img src="c:\Users\louis\OneDrive\Ambiente de Trabalho\Site DA\WhatsApp Image 2025-02-20 at 17.30.33-fotor-20250617144948.png" alt="Logo DA" class="logo" alt="Dondza Abroad">
+          <div class = "texto">KAYA RESTAURANT</div> <br><br>
+
+          <div class="search-contain">
+            <input type="search" placeholder="Pesquisar pratos ou restaurantes..." aria-label="Pesquisar" />
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M21 21l-6-6m2-5a7 7 0 1 1-14 0 7 7 0 0 1 14 0z" stroke="#ff4c29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </svg>
+          </div>
+  
+    </li> <br><br>
+    <a href="#">
+      <i class="bx bx-home-alt"></i>
+        <span class="icone"> Página Principal</span>
+      </a>
+
+        <a href="#">
+          <i class="bx bx-user"></i>
+            <span class="icone"> Perfil</span>
+          </a>
+
+            <a href="#">
+              <i class="bx bx-bell"></i>
+                <span class="icone"> Notificações</span>
+              </a>
+
+                <a href="#">
+                  <i class="bx bx-heart"></i>
+                    <span class="icone"> Favoritos</span>
+                  </a>
+
+                    <a href="#">
+                      <i class="bx bx-cart-alt"></i>
+                        <span class="icone"> Carrinho</span>
+                      </a>
+
+                        <a href="#">
+                          <i class="bx bx-cog"></i>
+                            <span class="icone"> Configurações</span>
+                          </a>
+  
+  </div>
+</header>
+<br> <br> <br>
+<div class="cont">
+  <div class="notification">
+    <h4>📦 Pedido confirmado</h4>
+    <p>O restaurante Grill Master confirmou seu pedido. Estará pronto em 20 minutos.</p>
+  </div>
+  <div class="notification">
+    <h4>🕒 Atraso no pedido</h4>
+    <p>O seu pedido no Sushi House pode demorar 10 minutos a mais devido à alta demanda.</p>
+  </div>
+  <div class="notification">
+    <h4>🎁 Cupão disponível!</h4>
+    <p>Use o código <strong>VERAO25</strong> e ganhe 25% de desconto no próximo pedido.</p>
+  </div>
+</div>
+
+</body>
+
+<script>
+     // Sidebar toggle
+  const menuBotn = document.getElementById('menu-botn');
+  const sidebar = document.getElementById('sidebar');
+
+  menuBotn.addEventListener('click', () => {
+    sidebar.classList.toggle('active');
+  });
+
+  // Fecha sidebar se clicar fora dela
+  document.addEventListener('click', (e) => {
+    if (!sidebar.contains(e.target) && !menuBotn.contains(e.target)) {
+      sidebar.classList.remove('active');
+    }
+  });
+</script>
+</html>

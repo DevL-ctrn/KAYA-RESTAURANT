@@ -1,0 +1,216 @@
+<!DOCTYPE html><html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dados de Pagamento - Padaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-size: cover;
+      margin: 0;
+      padding: 20px;
+      animation: fadeIn 1s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .container {
+      background-color: #ffffff;
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #2c3e50;
+    }
+    .section-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 30px;
+      color: #2c3e50;
+    }
+    .payment-option {
+      display: flex;
+      align-items: center;
+      background: #f4f8fb;
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      cursor: pointer;
+      transition: 0.3s;
+      border: 2px solid transparent;
+    }
+    .payment-option:hover {
+      background-color: #e3effa;
+    }
+    .payment-option input {
+      margin-right: 10px;
+    }
+    .payment-option img {
+      height: 30px;
+      margin-right: 10px;
+    }
+    .payment-fields {
+      display: none;
+      margin-top: 20px;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+    label {
+      font-weight: 600;
+      display: block;
+      margin-top: 10px;
+      margin-bottom: 5px;
+    }
+    input[type="text"],
+    select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      margin-top: 25px;
+      width: 100%;
+      background-color: #d43f20;
+      color: white;
+      padding: 12px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background-color: #d43f20;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Dados de Pagamento do Restaurante</h2><form id="formulario" novalidate>
+        
+  <div class="section-title">Conta Bancária (Obrigatório)</div>
+  <div id="camposBanco" class="payment-fields" style="display:block;">
+    <label for="banco">Nome do Banco:</label>
+    <select id="campoBanco" name="campoBanco">
+      <option value="">Seleccionar</option>
+      <option value="millennium">Millennium BIM</option>
+      <option value="bci">BCI</option>
+      <option value="standard">Standard Bank</option>
+      <option value="absa">ABSA Bank</option>
+    </select>
+
+
+    <label for="conta">Número da Conta :</label>
+    <input type="text" id="conta" name="conta" placeholder="Ex: 123456789012345" required />
+
+
+    <label for="tipoConta">Tipo de Conta:</label>
+    <select id="tipoConta" name="tipoConta">
+      <option value="">Seleccionar</option>
+      <option value="corrente">Conta Corrente</option>
+      <option value="poupanca">Conta Poupança</option>
+      <option value="empresa">Conta Empresa</option>
+    </select>
+
+    <label for="titular">Titular da Conta:</label>
+    <input type="text" id="titular" name="titular" placeholder="Ex: Padaria Aurora" required />
+
+    <label for="nuit">NIB:</label>
+    <input type="text" id="nib" name="nib" placeholder="Ex: 000 345 " />
+  </div>
+
+  <div class="section-title">Escolha 1 Método de Carteira Móvel</div>
+
+  <div class="payment-option">
+    <input type="radio" name="carteira" id="mpesaRadio" onclick="mostrarCampos('mpesa')" />
+    <img src="https://lifestyleug.s3.amazonaws.com/wp-content/uploads/2023/01/Mpesa-charges.jpg" alt="M-Pesa" />
+    <label for="mpesaRadio">M-Pesa</label>
+  </div>
+  <div class="payment-option">
+    <input type="radio" name="carteira" id="emolaRadio" onclick="mostrarCampos('emola')" />
+    <img src="https://play-lh.googleusercontent.com/2TGAhJ55tiyhCwW0ZM43deGv4lUTFTBMoq83mnAO6-bU5hi2NPyKX8BN8iKt13irK7Y=w480-h960-rw" alt="Emola" />
+    <label for="emolaRadio">Emola</label>
+  </div>
+  <div class="payment-option">
+    <input type="radio" name="carteira" id="mkeshRadio" onclick="mostrarCampos('mkesh')" />
+    <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/4b/53/d7/4b53d7af-160d-756b-7527-72849b7398e3/AppIcon-1x_U007emarketing-0-6-0-0-85-220-0.png/434x0w.webp" alt="Mkesh" />
+    <label for="mkeshRadio">Mkesh</label>
+  </div>
+
+  <div id="camposMpesa" class="payment-fields">
+    <label for="mpesa">Número M-Pesa:</label>
+    <input type="text" id="mpesa" name="mpesa" maxlenght="9" pattern = "\d{9}" inputmode = "numeric" required placeholder="Ex: 84 XXX XXXX" >
+  </div>
+
+  <div id="camposEmola" class="payment-fields">
+    <label for="emola">Número Emola:</label>
+    <input type="text" id="emola" name="emola" maxlenght="9" pattern = "\d{9}" inputmode = "numeric" required placeholder="Ex: 86 XXX XXXX" >
+  </div>
+
+  <div id="camposMkesh" class="payment-fields">
+    <label for="mkesh">Número Mkesh:</label>
+    <input type="text" id="mkesh" name="mkesh" maxlenght="9" pattern = "\d{9}" inputmode = "numeric" required placeholder="Ex: 82 XXX XXXX" >
+  </div>
+
+  <button type="submit">Guardar Dados</button>
+</form>
+
+  </div>  <script>
+    function esconderTodosCampos() {
+      document.querySelectorAll('.payment-fields').forEach(el => {
+        if (!el.id.includes('Banco')) {
+          el.style.display = 'none';
+        }
+      });
+    }
+
+    function mostrarCampos(tipo) {
+      esconderTodosCampos();
+      const campoId = 'campos' + tipo.charAt(0).toUpperCase() + tipo.slice(1);
+      const campo = document.getElementById(campoId);
+      if (campo) campo.style.display = 'block';
+    }
+
+
+    document.getElementById('formulario').addEventListener('submit', function (e) {
+      const banco = document.getElementById('banco');
+      const conta = document.getElementById('conta');
+      const titular = document.getElementById('titular');
+      let carteiraSelecionada = document.querySelector('input[name="carteira"]:checked');
+
+      if (!banco.value.trim() || !conta.value.trim() || !titular.value.trim()) {
+        alert('Por favor, preencha todos os campos obrigatórios da conta bancária.');
+        e.preventDefault();
+        return;
+      }
+
+      if (!carteiraSelecionada) {
+        alert('Por favor, escolha um método de carteira móvel.');
+        e.preventDefault();
+        return;
+      }
+
+      const carteiraId = 'campos' + carteiraSelecionada.id.replace('Radio', '');
+      const carteiraInput = document.querySelector('#' + carteiraId + ' input');
+      if (!carteiraInput.value.trim()) {
+        alert('Por favor, preencha o número da carteira móvel escolhida.');
+        e.preventDefault();
+        return;
+      }
+
+      alert('Dados guardados com sucesso!');
+   
+    });
+
+  </script></body>
+</html>

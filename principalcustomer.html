@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet"/>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <title>Kaya Restaurant</title>
+  <style>
+    /* Reset & base */
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #fafafa;
+      color: #333;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+      justify-content: center;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    ul {
+      list-style: none;
+    }
+
+    /* HEADER */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 70px;
+      background: #ff4c29;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 2rem;
+      z-index: 1100;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .logo {
+      font-weight: 800;
+      font-size: 1.6rem;
+      letter-spacing: 3px;
+      cursor: pointer;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    nav > * {
+      cursor: pointer;
+      position: relative;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    nav > *:hover {
+      color: #ffeae0;
+    }
+    .search-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .search-container input {
+      padding: 0.5rem 2.5rem 0.5rem 1rem;
+      border-radius: 25px;
+      border: none;
+      outline: none;
+      font-size: 0.95rem;
+      transition: box-shadow 0.3s ease;
+      width: 280px;
+    }
+    .search-container input:focus {
+      box-shadow: 0 0 8px #ff4c29aa;
+    }
+    .search-container svg {
+      position: absolute;
+      right: 10px;
+      width: 18px;
+      height: 18px;
+      fill: #ff4c29;
+      pointer-events: none;
+    }
+    .hero-content button {
+      position: relative;
+      padding: 13px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      outline: none;
+      margin: 0 auto;
+      border: none;
+      background: white;
+      transition: 1s;
+      overflow: hidden;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    .hero-content button:hover{
+       background var(--clr);
+       box-shadow: 0 0 10px var(--clr),
+                    0 0 30px var(--clr),
+                    0 0 60px var(--clr),
+                    0 0 100px var(--clr);
+      
+    }
+    .hero-content button::before{
+       content:'';
+       height: 400%;
+       width: 40px;
+       position: absolute;
+       background: var(--clr);
+       transition: 1s;
+       animation: animate 2s linear infinite;
+       animation-delay: calc (.33s * var(--i));
+      
+    }
+
+    .hero-content button:hover::before{
+        width:120%;             
+
+    }
+ 
+     .spc{
+    gap: 120px;
+    display:flex;
+    padding: 30px;
+  }
+
+    .special-button {
+      width: 40px;
+      height: 40px;
+      border: 3px solid rgba(245, 245, 245, 0.877);
+      background: #222;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    
+    @keyframes animate{
+        0%{
+            transform: rotate(0deg);
+        }
+
+        100%{
+            transform: rotate(360deg);
+        }
+    }
+
+    .hero-content button::after{
+        content:'';
+       inset: 4px;
+       position: absolute;
+       background: white;
+       transition: .5s;
+     
+    }
+
+    .hero-content button:hover::after{
+        background: var(--clr);
+
+    }
+    .hero-content button span {
+      position: relative;
+      font-size: 20px;
+      font-weight: 500;
+      color: black;
+      z-index: 1;
+      opacity: .8;
+      letter-spacing: 4px;
+      transition:.5s;
+    }
+
+    .hero-content button:hover span {
+      opacity:1;
+      color: white;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+     select {
+      padding: 0.6rem 1rem;
+      font-size: 1rem;
+      border-radius: 6px;
+      border: 1px solid #cbd5e1;
+      background: white;
+    }
+    .selector-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem 0;
+    }
+    .selector-container h2 {
+      font-size: 1.8rem;
+      color: #1f2937;
+      flex: 1;
+    }
+
+  
+
+    .icon-button,
+    .search-icon-button {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #ff4c29;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+     .special-button {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #222;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+   
+    /* Mobile menu */
+    @media (max-width: 768px) {
+      .search-container input {
+        width: 140px;
+      }
+      nav {
+        position: fixed;
+        top: 70px;
+        right: -100%;
+        height: calc(100vh - 70px);
+        width: 220px;
+        background: #ff4c29;
+        flex-direction: column;
+        padding: 2rem 1rem;
+        gap: 1.8rem;
+        transition: right 0.35s ease;
+        z-index: 1200;
+      }
+      nav.active {
+        right: 0;
+      }
+      .menu-toggle {
+        display: flex;
+        position: absolute;
+        right: 20px;
+        top: 15px;
+      }
+    }
+
+    /* HERO */
+    .hero {
+      margin-top: 70px;
+      height: 500px;
+      background:  url('https://minervafoods.com/wp-content/uploads/2023/04/MNF_picanha_assada_dry_rub_titulo_do_post_desktop.jpg') center/cover no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+      padding: 0 1rem;
+      position: relative;
+      overflow: hidden;
+      clip-path:polygon(0 0, 100% 0, 100% 85%, 0 100%);
+    }
+    .hero-content {
+      max-width: 700px;
+      transform-style: preserve-3d;
+    }
+    .hero-title {
+      font-size: 3.0rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      letter-spacing: 2px;
+      animation: fadeInUp 1s ease forwards;
+      opacity: 0;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+    .hero-content p {
+      font-weight: 300;
+      font-size: 1.3rem;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeInUp 1s ease forwards;
+      animation-delay: 0.3s;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+    
+    .hero-content button:hover {
+      background: #ff4c29;
+      color: white;
+    }
+
+    .slideshow-contain {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      margin: 20px auto;
+      overflow: hidden;
+      border-radius: 16px;
+     
+      aspect-ratio: 16 / 9;
+    }
+    .slide {
+      display: none;
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+    
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(60%);
+    }
+    .text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: white;
+      padding: 20px 30px;
+      
+      border-radius: 8px;
+    }
+    .prev, .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      padding: 16px;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      transition: 0.3s;
+    }
+    .next {
+      right: 0;
+    }
+    .cursor{opacity:1;animation:blink 1s steps(2) infinite}
+    
+
+    #como {
+      padding: 2rem 0;
+    }
+    #como h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    /* Scroll animation */
+    @keyframes fadeInUp {
+      0% {opacity: 0; transform: translateY(30px);}
+      100% {opacity: 1; transform: translateY(0);}
+    }
+
+    /* RESTAURANTES - Scroll Horizontal */
+    .restaurants-section {
+      padding: 3rem 1rem 5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .restaurants-section h2 {
+      font-weight: 800;
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #222;
+      letter-spacing: 1.5px;
+    }
+    .restaurant-scroll {
+      display: flex;
+      gap: 1.8rem;
+      overflow-x: auto;
+      padding-bottom: 0.5rem;
+      scroll-padding: 1rem;
+      scroll-behavior: smooth;
+    }
+    .restaurant-scroll::-webkit-scrollbar {
+      height: 8px;
+    }
+    .restaurant-scroll::-webkit-scrollbar-track {
+      background: #eee;
+      border-radius: 10px;
+    }
+    .restaurant-scroll::-webkit-scrollbar-thumb {
+      background: #ff4c29cc;
+      border-radius: 10px;
+    }
+
+    /* Card Torto */
+    .restaurant-card {
+      background: white;
+      flex: 0 0 320px;
+      border-radius: 35px 10px 35px 10px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+    .restaurant-card:hover {
+      transform: translateY(-12px) rotate(-1.5deg);
+     
+      z-index: 10;
+    }
+    .restaurant-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 35px 10px 0 0;
+      transition: transform 0.4s ease;
+    }
+    .restaurant-card:hover .restaurant-img {
+      transform: scale(1.1);
+    }
+    .restaurant-content {
+      padding: 1.5rem 1.6rem 2rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .restaurant-name {
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 0.3rem;
+      color: #ff4c29;
+      letter-spacing: 0.5px;
+    }
+    .restaurant-details {
+      font-size: 0.95rem;
+      color: #555;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+      font-weight: 500;
+    }
+    .restaurant-rating {
+      color: #f1c40f;
+      font-size: 1.15rem;
+      margin-bottom: 1rem;
+      letter-spacing: 2px;
+      user-select: none;
+    }
+    .btn-order {
+      background: #ff4c29;
+      border: none;
+      color: white;
+      padding: 0.7rem 1.7rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      align-self: flex-start;
+      cursor: pointer;
+      box-shadow: 0 6px 15px rgba(255, 76, 41, 0.6);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      clip-path: polygon(
+        25% 0%, 75% 0%,
+        100% 50%,
+        75% 100%, 25% 100%,
+        0% 50%
+      )
+    }
+    .btn-order:hover {
+      background: #d43f20;
+      box-shadow: 0 9px 25px rgba(212, 63, 32, 0.9);
+    }
+
+    /* Footer */
+    footer {
+      background: #222;
+      color: #ddd;
+      text-align: center;
+      padding: 2rem 1rem;
+      font-weight: 400;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+    }
+
+    .footer-col h4 {
+      font-size: 1.7rem;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+
+    .social-icons {
+     display: flex;
+     align-items: center;
+     gap: 20px;
+     justify-content: center;
+    }
+
+    .social-icons a {
+     text-decoration: none;
+     width: 45px;
+     height: 45px;
+     border-radius:50%;
+     font-size:20px;
+     border: 3px solid white;
+     color: white;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     cursor: pointer;
+     transition: all 0.5s ease;
+    }
+
+    .social-icons a:hover:first-child {
+      color: blue;
+      border: 3px solid blue;
+      box-shadow: 0 0 25px blue; 
+    }
+
+    .social-icons a:hover:nth-child(2) {
+      color:#ee2a7b;
+      border: 3px solid #ee2a7b;
+      box-shadow: 0 0 25px #ee2a7b; 
+    }
+
+    .social-icons a:hover:nth-child(3) {
+      color: black;
+      border: 3px solid black;
+      box-shadow: 0 0 25px black; 
+    }
+
+    /* Responsivo */
+    @media (max-width: 768px) {
+      .hero {
+        height: 500px;
+      }
+      .hero-content h1 {
+        font-size: 2.3rem;
+      }
+      .hero-content p {
+        font-size: 1rem;
+      }
+      .restaurant-card {
+        flex: 0 0 280px;
+      }
+      .search-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .search-container input {
+      padding: 0.5rem 2.5rem 0.5rem 1rem;
+      border-radius: 25px;
+      border: none;
+      outline: none;
+      font-size: 0.95rem;
+      transition: box-shadow 0.3s ease;
+      width: 200px;
+    }
+      nav {
+        gap: 1rem;
+      }
+      nav input {
+        width: 120px;
+      }
+       .slideshow-contain {
+        aspect-ratio: 12 / 7;
+        height: 400px;
+      }
+    .text {
+    padding: 10px 15px;
+    max-width: 90%;
+    font-size: 0.9rem; 
+  }
+  .text h1 {
+    font-size: 1.3rem; 
+    line-height: 1.3;
+  }
+  .text p {
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+    }
+
+    .topbar {
+    background-color: #222;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* espaço entre logo e botão */
+  }
+
+  .icone{
+    font-size: 16px;
+  }
+  .menu-botn {
+    font-size: 28px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .topbar h1 {
+    margin: 0;
+    font-size: 20px;
+  }
+
+  /* Sidebar (menu lateral) - começa escondido à esquerda */
+  .sidebar {
+    height: 200vh;
+    width: 250px;
+    background-color: #222; ;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: -250px; /* escondido à esquerda */
+    transition: left 0.3s ease;
+    padding-top: 60px; /* espaço para topbar */
+    box-sizing: border-box;
+    z-index: 1000;
+  
+  }
+
+  /* Quando ativo, fica visível */
+  .sidebar.active {
+    left: 0;
+  }
+
+  /* Itens do menu com ícones */
+  .sidebar a {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+    border-bottom: 1px solid #444;
+  }
+  .sidebar a:hover {
+    background-color: #d43f20;
+  }
+  /* Ícones simples com emoji só pra demo */
+  .sidebar a .icon {
+    margin-right: 15px;
+    font-size: 22px;
+  }
+
+  .sidebar.active ~ .contentp {
+    margin-right: 250px;
+  }
+ 
+  .sidebar ul li:hover a.icone,
+  .sidebar ul li:hover a.texto{
+    color: var(--bg);
+  }
+
+  .texto{
+    font-size: 19px;
+    color:#d43f20;
+  }
+  
+  .logotipo {
+      display:flex; flex-direction:column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .logotipo img {
+      height: 50px;
+      margin-right: 10px;
+    }
+  i {
+    margin-right: 3px;
+  }
+  /* Esconde o botão no desktop e sidebar também */
+  @media (min-width: 769px) {
+    .menu-botn {
+      display: none;
+    }
+    .sidebar {
+      display: none;
+    }
+    
+
+  }
+  
+   .like-btn {
+    background: none;
+    border: none;
+    color: #888;
+    font-size: 18px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+
+  .like-btn.liked {
+    color: red;
+  }
+
+  .restaurant-line{
+    display:flex;
+    gap:100px;
+  }
+  </style>
+</head>
+<body>
+<div class="top-bar">
+<header>
+  <div class="rand" style ="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size:30px;"><b>Kaya Restaurant</b></div>
+  <div class="menu-botn" id="menu-botn">&#9776;</div> <!-- botão à direita -->
+
+  <nav aria-label="Menu principal">
+    <div class="search-container">
+      <input type="search" placeholder="Pesquisar pratos ou restaurantes..." aria-label="Pesquisar" />
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M21 21l-6-6m2-5a7 7 0 1 1-14 0 7 7 0 0 1 14 0z" stroke="#ff4c29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+    </div>
+    
+    <div class="icon-button" title="darkModebtn"><i class="fa-solid fa-moon"></i></div>
+     <div class="icon-button" title="langBtn">EN</div>
+    <div class="icon-button" title="Login"><a href="logincliente.html"><i class="fas fa-user"></i></a></div>
+    <div class="icon-button" title="Fazer Compras"><a href="carrinhocliente.html"><i class="fas fa-shopping-bag"></a></i></div>
+  </nav>
+
+</div>
+  
+  <div class="sidebar" id="sidebar"> <br>
+    <li class ="logotipo">
+      
+        <img src="c:\Users\louis\OneDrive\Ambiente de Trabalho\Site DA\WhatsApp Image 2025-02-20 at 17.30.33-fotor-20250617144948.png" alt="Logo DA" class="logo" alt="Dondza Abroad">
+          <div class = "texto">KAYA RESTAURANT</div> <br><br>
+
+          <div class="search-container">
+            <input type="search" placeholder="Pesquisar pratos ou restaurantes..." aria-label="Pesquisar" />
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M21 21l-6-6m2-5a7 7 0 1 1-14 0 7 7 0 0 1 14 0z" stroke="#ff4c29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </svg>
+          </div>
+  
+    </li> <br><br>
+    <a href="#">
+      <i class="bx bx-home-alt"></i>
+        <span class="icone"> Página Principal</span>
+      </a>
+
+        <a href="#">
+          <i class="bx bx-user"></i>
+            <span class="icone"> Perfil</span>
+          </a>
+
+            <a href="#">
+              <i class="bx bx-bell"></i>
+                <span class="icone"> Notificações</span>
+              </a>
+
+                <a href="#">
+                  <i class="bx bx-heart"></i>
+                    <span class="icone"> Favoritos</span>
+                  </a>
+
+                    <a href="#">
+                      <i class="bx bx-cart-alt"></i>
+                        <span class="icone"> Carrinho</span>
+                      </a>
+
+                        <a href="#">
+                          <i class="bx bx-cog"></i>
+                            <span class="icone"> Configurações</span>
+                          </a>
+                          
+     <div class="spc">
+    <div class="special-button" title="langBtn">EN</div>                   
+    <div class="special-button" title="darkModebtn"><i class="fa-solid fa-moon"></i></div>
+    </div>
+     
+  </div>
+</header>
+
+<div class = "contentp">
+<main>
+  <section class="hero" role="banner" aria-label="Banner principal do site">
+    <div class="hero-content">
+    <h1 class="hero-title">
+      <span id="typed-text"></span>
+      <span class="cursor">|</span>
+      </h1>
+      <p>Faça seu pedido, acompanhe em tempo real e receba exactamente como gosta.</p>
+      
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="selector-container">
+      <h2>Escolha sua Cidade</h2>
+      <select id="selectCidade" onchange="filtrarPorCidade(this.value)">
+        <option value="">Todas</option>
+        <option value="Maputo">Maputo</option>
+        <option value="Matola">Matola</option>
+        <option value="Xai-Xai">Xai-Xai</option>
+        <option value="Inhambane">Inhambane</option>
+        <option value="Maxixe">Maxixe</option>
+        <option value="Beira">Beira</option>
+        <option value="Chimoio">Chimoio</option>
+        <option value="Tete">Tete</option>
+        <option value="Quelimane">Quelimane</option>
+        <option value="Nampula">Nampula</option>
+        <option value="Matola">Pemba</option>
+        <option value="Matola">Lichinga</option>
+      </select>
+         
+    
+        
+      
+     
+    </div>
+
+    
+    <section class="restaurants-section" aria-label="Lista de restaurantes parceiros">
+    <h2>Restaurantes Parceiros</h2>
+    <div class="restaurant-scroll" tabindex="0" role="list">
+      <article class="restaurant-card" role="listitem" tabindex="0" aria-label="Restaurante: Pizzabox, tempo 20-25 minutos, preço médio 320 meticais">
+        <img src="https://images.unsplash.com/photo-1555992336-03a23c7f6b6b?auto=format&fit=crop&w=600&q=80" alt="Prato do Pizzabox" class="restaurant-img" />
+        <div class="restaurant-content">
+          <h3 class="restaurant-name">Pizzabox</h3>
+           <div class="restaurant-line">
+          <p class="restaurant-details" style="color:rgb(8, 60, 80)"><span><b>Pizzaria</b></span></p> 
+          <button class ="like-btn"><i class="fas fa-heart"></i></button></div>
+           <p class="restaurant-details"><i class="fas fa-clock"></i> 08:00 - 18:00</p>
+          <p class="restaurant-details"> <i class="fas fa-map-marker-alt"></i>Av. 24 de Julho  </p><br> 
+           <p class="restaurant-details" style="color:red"><b>Fechado</b></p> <br>
+          <button class="btn-order" aria-label="Fazer pedido no Grill Master"><a href="catalogocliente.html">Ver Catálogo</a> </button>
+        </div>
+      </article>
+   
+  </section>
+
+  <section id="como">
+    <h2>Porquê escolher o app?</h2> <br>
+    <div class="slideshow-contain">
+      <div class="slide">
+        <img src="https://images.pexels.com/photos/3206080/pexels-photo-3206080.jpeg" alt="Slide 1">
+        <div class="text">
+          <h1><b>Faça o pedido em instantes</b></h1> <br>
+          <p>Escolha o restaurante, monte o seu pedido e confirme tudo sem precisar de chamadas e complicações.</p>
+        </div>
+      </div>
+      <div class="slide">
+        <img src="https://detroitpraisenetwork.com/uploads/2024/01/GettyImages-1451342089.jpg?format=auto&optimize=high&width=1920" alt="Slide 2">
+        <div class="text">
+          <h1><b>Chegue e leve, sem esperar</b></h1><br>
+          <p>O seu pedido fica pronto antes de você chegar. Evite filas, ganhe tempo e tenha um dia mais leve.</p>
+        </div>
+      </div>
+      <div class="slide">
+        <img src="https://foodsapp.com.br/images/20-p-1080.jpeg" alt="Slide 3">
+        <div class="text">
+          <h1><b>Prático, seguro e confiável</b></h1><br>
+          <p>Receba exactamente o que pediu, no horário certo. Sem filas e sem complicações.</p>
+        </div>
+      </div>
+      <a class="prev" onclick="mudarSlide(-1)">&#10094;</a>
+      <a class="next" onclick="mudarSlide(1)">&#10095;</a>
+    </div>
+  </section>
+
+</main>
+
+<br> <br> <br>
+
+<footer>
+  <div class="footer-main">
+    <div class="footer-col">
+      <h4>Kaya Restaurant</h4>
+      <p> <i>...</i></p> <br> <br>
+      <p><strong>Local:</strong> Moçambique – Maputo</p> <br>
+      <p><strong>Email:</strong> kayarestaurant@gmail.com</p> <br>
+    </div> <br>
+    <div class="footer-col">
+      <h4>Siga-nos</h4> 
+      <div class="social-icons">
+        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/kwetobread.mz?igsh=MW1jY2F6Z2R6aGFvcg=="><i class="fa-brands fa-instagram"></i></a>
+        <a href="#"><i class="fa-brands fa-tiktok"></i></a> 
+      </div>
+    </div>
+  </div>
+  <div class="footer-legal">
+    <br><p>
+      <a href="termos.html">Termos e Condições</a> | 
+      <a href="politicapriv.html">Política de Privacidade</a> | 
+      <a href="politicaentrega.html">Política de Entrega e Devolução</a>
+    </p> <br>
+    <p>© 2025 KAYARESTAURANT. Todos os direitos reservados. Desenvolvido por [empresa de web].</p>
+    
+  </div>
+</div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+
+    const typeEl = document.getElementById('typed-text');
+  const phrases = ["Conecte-se aos melhores restaurantes da sua cidade.", "Fome? A gente resolve.", "Da cozinha directo para a sua mesa."];
+  let pi = 0, si = 0, forward = true;
+  function typeTick(){
+    const cur = phrases[pi];
+    if(forward){
+      si++;
+      typeEl.textContent = cur.slice(0,si);
+      if(si === cur.length){ forward = false; setTimeout(typeTick, 1400); return; }
+    } else {
+      si--;
+      typeEl.textContent = cur.slice(0,si);
+      if(si === 0){ forward = true; pi = (pi+1) % phrases.length; setTimeout(typeTick, 300); return; }
+    }
+    setTimeout(typeTick, forward ? 45 : 25);
+  }
+  setTimeout(typeTick, 600);
+
+  // --- Dark toggle (só se existir no HTML)
+  const toggle = document.getElementById("darkToggle");
+  if (toggle) {
+    toggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+      toggle.innerHTML = document.body.classList.contains("dark")
+        ? '<i class="fas fa-sun"></i>'
+        : '<i class="fas fa-moon"></i>';
+    });
+  }
+
+  // --- Scroll reveal
+  const reveals = document.querySelectorAll(".reveal");
+  if (reveals.length) {
+    window.addEventListener("scroll", () => {
+      const windowHeight = window.innerHeight;
+      reveals.forEach(r => {
+        const revealTop = r.getBoundingClientRect().top;
+        if (revealTop < windowHeight - 50) r.classList.add("active");
+      });
+    });
+  }
+
+  // --- Sidebar toggle
+  const menuBotn = document.getElementById('menu-botn');
+  const sidebar = document.getElementById('sidebar');
+  if (menuBotn && sidebar) {
+    menuBotn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      sidebar.classList.toggle('active');
+    });
+    document.addEventListener('click', (e) => {
+      if (!sidebar.contains(e.target) && !menuBotn.contains(e.target)) {
+        sidebar.classList.remove('active');
+      }
+    });
+  }
+
+  // --- Like buttons
+  document.querySelectorAll('.like-btn').forEach(btn => {
+    btn.addEventListener('click', () => btn.classList.toggle('liked'));
+  });
+
+  // --- Cards animation
+  const cards = document.querySelectorAll('.restaurant-card');
+  if (cards.length) {
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.transition = 'transform 0.6s ease, opacity 0.6s ease';
+          entry.target.style.transform = 'translateY(0) rotate(0deg)';
+          entry.target.style.opacity = '1';
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    cards.forEach(card => {
+      card.style.transform = 'translateY(20px) rotate(-1deg)';
+      card.style.opacity = '0';
+      observer.observe(card);
+    });
+  }
+
+  // --- Slideshow
+  const slides = document.querySelectorAll('.slide');
+  if (slides.length) {
+    let slideIndex = 0;
+
+    function showSlide(n) {
+      slides.forEach(s => s.style.display = 'none');
+      slideIndex = (n + slides.length) % slides.length;
+      slides[slideIndex].style.display = 'block';
+    }
+
+    // Expor funções globais (compatíveis com onclick inline)
+    window.mostrarSlide = showSlide;
+    window.mudarSlide = function(n) { showSlide(slideIndex + n); };
+
+    // controles
+    const prevBtn = document.querySelector('.prev');
+    const nextBtn = document.querySelector('.next');
+    if (prevBtn) prevBtn.addEventListener('click', () => showSlide(slideIndex - 1));
+    if (nextBtn) nextBtn.addEventListener('click', () => showSlide(slideIndex + 1));
+
+    // autoplay com pausa
+    showSlide(slideIndex);
+    let slideInterval = setInterval(() => showSlide(slideIndex + 1), 5000);
+    const slideshowContain = document.querySelector('.slideshow-contain');
+    if (slideshowContain) {
+      slideshowContain.addEventListener('mouseenter', () => clearInterval(slideInterval));
+      slideshowContain.addEventListener('mouseleave', () => {
+        slideInterval = setInterval(() => showSlide(slideIndex + 1), 5000);
+      });
+    }
+  }
+
+});
+</script>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      background: url('https://img.freepik.com/premium-photo/restaurant-food-restaurant-menu-photos-menu_830198-1091.jpg?w=1480')center/cover no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .login-container {
+      background: #d43f20;
+      padding: 40px 20px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      width: 320px;
+    }
+
+    .login-container h2 {
+      text-align: center;
+      color: #fff;
+      margin-bottom: 25px;
+    }
+
+    .input-field {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    
+    .input-field input::placeholder {
+      color: #fff;
+      opacity: 0.7;
+    }
+
+
+    .input-field input {
+      width: 100%;
+      padding: 12px 40px 12px 12px;
+      border: none;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      outline: none;
+    }
+
+    .input-field i {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #fff;
+    }
+
+    .options {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+
+    .options a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 12px;
+      background: #fff;
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .login-btn:hover {
+      background: #e0e0e0;
+    }
+
+    .register {
+      margin-top: 20px;
+      text-align: center;
+      color: #fff;
+      font-size: 14px;
+    }
+
+    .register a {
+      color: #fff;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <h2>Login</h2>
+    <div class="input-field">
+      <input type="email" placeholder="Email" required>
+      <i class="fa fa-envelope"></i>
+    </div>
+    <div class="input-field">
+      <input type="password" placeholder="Palavra-passe" required>
+      <i class="fa fa-lock"></i>
+    </div>
+    <div class="options">
+      <label><input type="checkbox"> Lembrar-me</label>
+      <a href="#">Esqueceu a senha?</a> 
+    </div><br>
+    <button class="login-btn">Login</button> <br>
+    <div class="register">
+      Não tem uma conta? <a href="cadastrocliente.html">Cadastre-se aqui</a>
+    </div>
+   
+    <div class="register">
+       <a href="cliente.html">Voltar a página principal</a>
+    </div>
+  </div>
+
+</body>
+</html>

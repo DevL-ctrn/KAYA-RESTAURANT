@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Carrinho - Kaya Restaurant</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <style>
+     /* Reset & base */
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f9f9f9;
+      margin: 0;
+      padding: 1rem;
+      color: #333;
+    }
+
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 70px;
+      background: #ff4c29;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 2rem;
+      z-index: 1100;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 1.6rem;
+      letter-spacing: 3px;
+      cursor: pointer;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    nav > * {
+      cursor: pointer;
+      position: relative;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    nav > *:hover {
+      color: #ffeae0;
+    }
+
+    .search-contain {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-contain input {
+      padding: 0.5rem 2.5rem 0.5rem 1rem;
+      border-radius: 25px;
+      border: none;
+      outline: none;
+      font-size: 0.95rem;
+      transition: box-shadow 0.3s ease;
+      width: 280px;
+    }
+
+    .search-contain input:focus {
+      box-shadow: 0 0 8px #ff4c29aa;
+    }
+
+    .search-contain svg {
+      position: absolute;
+      right: 10px;
+      width: 18px;
+      height: 18px;
+      fill: #ff4c29;
+      pointer-events: none;
+    }
+
+    .icon-button {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: orangered;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .perfil-contain {
+      max-width: 800px;
+      margin: 120px auto 0;
+      padding: 1rem;
+    }
+
+    .perfil-header {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+
+    .carrinho-item {
+      display: flex;
+      gap: 1rem;
+      background: #fff0ec;
+      border: 1px solid #ffd4c2;
+      padding: 1rem;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+
+    .carrinho-item img {
+      width: 160px;
+      height: 190px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    .pedido-info {
+      flex: 1;
+    }
+
+    .nome-comida {
+      margin: 0;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #e74c3c;
+    }
+
+    .detalhes-pedido {
+      margin: 0.2rem 0;
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    .total-section {
+      text-align: right;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-top: 2rem;
+      color: #2c3e50;
+    }
+
+    .finalizar-btn {
+      display: inline-block;
+      background-color: #ff4c29;
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 30px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: background-color 0.3s ease;
+    }
+
+    .finalizar-btn:hover {
+      background-color: #e03e1f;
+    }
+
+     .contain {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+     .carrinho-item img {
+      width: 160px;
+      height: 190px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    .topbar h1 {
+    margin: 0;
+    font-size: 20px;
+  }
+
+  .topbar {
+    background-color: #222;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* espaço entre logo e botão */
+  }
+
+  .icone{
+    font-size: 16px;
+  }
+  .menu-botn {
+    font-size: 28px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  /* Sidebar (menu lateral) - começa escondido à esquerda */
+  .sidebar {
+    height: 100vh;
+    width: 250px;
+    background-color: #222; ;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: -250px; /* escondido à esquerda */
+    transition: left 0.3s ease;
+    padding-top: 60px; /* espaço para topbar */
+    box-sizing: border-box;
+    z-index: 1000;
+  
+  }
+
+  /* Quando ativo, fica visível */
+  .sidebar.active {
+    left: 0;
+  }
+
+  /* Itens do menu com ícones */
+  .sidebar a {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+    border-bottom: 1px solid #444;
+  }
+  .sidebar a:hover {
+    background-color: #d43f20;
+  }
+  /* Ícones simples com emoji só pra demo */
+  .sidebar a .icon {
+    margin-right: 15px;
+    font-size: 22px;
+  }
+
+  .sidebar.active ~ .contentp {
+    margin-right: 250px;
+  }
+ 
+  .sidebar ul li:hover a.icone,
+  .sidebar ul li:hover a.texto{
+    color: var(--bg);
+
+  }
+  
+    .texto{
+    font-size: 19px;
+    color:#d43f20;
+    }
+
+  .logotipo {
+      display:flex; flex-direction:column;
+      justify-content: center;
+      align-items: center;
+    }
+  
+ .icon-button,
+    .search-icon-button {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: orangered;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+     .search-contain input {
+        width: 140px;
+         padding: 0.5rem 2.5rem 0.5rem 1rem;
+      border-radius: 25px;
+      border: none;
+      outline: none;
+      font-size: 0.95rem;
+      transition: box-shadow 0.3s ease;
+      width: 200px;
+      }
+       .search-contain {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+       .carrinho-item img {
+      width: 90px;
+      height: 120px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+      nav {
+        position: fixed;
+        top: 70px;
+        right: -100%;
+        height: calc(100vh - 70px);
+        width: 220px;
+        background: #ff4c29;
+        flex-direction: column;
+        padding: 2rem 1rem;
+        gap: 1.8rem;
+        transition: right 0.35s ease;
+        z-index: 1200;
+      }
+      nav.active {
+        right: 0;
+      }
+      .menu-toggle {
+        display: flex;
+        position: absolute;
+        right: 20px;
+        top: 15px;
+      }
+    
+    }
+
+    /* Esconde o botão no desktop e sidebar também */
+  @media (min-width: 769px) {
+    .menu-botn {
+      display: none;
+    }
+    .sidebar {
+      display: none;
+    }
+    
+
+  }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <header>
+  <div class="rand" style ="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size:30px;"><b>Kaya Restaurant</b></div>
+  <div class="menu-botn" id="menu-botn">&#9776;</div> <!-- botão à direita -->
+
+  <nav aria-label="Menu principal">
+    <div class="search-contain">
+      <input type="search" placeholder="Pesquisar pratos ou restaurantes..." aria-label="Pesquisar" />
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M21 21l-6-6m2-5a7 7 0 1 1-14 0 7 7 0 0 1 14 0z" stroke="#ff4c29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+    </div>
+ <div class="icon-button" title="Login"><i class="fas fa-user"></i></div>
+    <div class="icon-button" title="Fazer Compras"><i class="fas fa-shopping-bag"></i></div>
+  </nav>
+
+</div>
+      <div class="sidebar" id="sidebar"> <br>
+    <li class ="logotipo">
+      
+        <img src="c:\Users\louis\OneDrive\Ambiente de Trabalho\Site DA\WhatsApp Image 2025-02-20 at 17.30.33-fotor-20250617144948.png" alt="Logo DA" class="logo" alt="Dondza Abroad">
+          <div class = "texto">KAYA RESTAURANT</div> <br><br>
+
+          <div class="search-contain">
+            <input type="search" placeholder="Pesquisar pratos ou restaurantes..." aria-label="Pesquisar" />
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M21 21l-6-6m2-5a7 7 0 1 1-14 0 7 7 0 0 1 14 0z" stroke="#ff4c29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </svg>
+          </div>
+  
+    </li> <br><br>
+    <a href="#">
+      <i class="bx bx-home-alt"></i>
+        <span class="icone"> Página Principal</span>
+      </a>
+
+        <a href="#">
+          <i class="bx bx-user"></i>
+            <span class="icone"> Perfil</span>
+          </a>
+
+            <a href="#">
+              <i class="bx bx-bell"></i>
+                <span class="icone"> Notificações</span>
+              </a>
+
+                <a href="#">
+                  <i class="bx bx-heart"></i>
+                    <span class="icone"> Favoritos</span>
+                  </a>
+
+                    <a href="#">
+                      <i class="bx bx-cart-alt"></i>
+                        <span class="icone"> Carrinho</span>
+                      </a>
+
+                        <a href="#">
+                          <i class="bx bx-cog"></i>
+                            <span class="icone"> Configurações</span>
+                          </a>
+  
+  </div>
+</header>
+    
+
+  <div class="perfil-contain">
+    <div class="perfil-header" style="text-align: center; font-size:35px;">Carrinho de Compras</div> <br>
+
+    <div id="carrinho-lista"></div>
+
+    <div class="total-section">
+      Total Geral: <span id="total-geral">0 MT</span>
+    </div>
+
+    <div style="text-align: right;">
+      <button class="finalizar-btn">Finalizar Compra</button>
+    </div>
+  </div>
+
+  <script>
+     // Sidebar toggle
+  const menuBotn = document.getElementById('menu-botn');
+  const sidebar = document.getElementById('sidebar');
+
+  menuBotn.addEventListener('click', () => {
+    sidebar.classList.toggle('active');
+  });
+
+  // Fecha sidebar se clicar fora dela
+  document.addEventListener('click', (e) => {
+    if (!sidebar.contains(e.target) && !menuBotn.contains(e.target)) {
+      sidebar.classList.remove('active');
+    }
+  });
+    const produtosNoCarrinho = [
+      {
+        nome: "Frango Grelhado com Ervas",
+        restaurante: "Grill Master",
+        localizacao: "Av. 24 de Julho",
+        pagamento: "M-Pesa",
+        preco: 450,
+        imagem: "https://images.unsplash.com/photo-1600891964599-f61ba0e24092?fit=crop&w=300&h=300"
+      },
+      {
+        nome: "Pizza Margherita",
+        restaurante: "Itália Moz",
+        localizacao: "Polana",
+        pagamento: "Cartão",
+        preco: 600,
+        imagem: "https://images.unsplash.com/photo-1601924928376-acb6f3c6f7a3?fit=crop&w=300&h=300"
+      }
+    ];
+
+    const carrinhoLista = document.getElementById("carrinho-lista");
+    const totalGeralEl = document.getElementById("total-geral");
+    let totalGeral = 0;
+
+    produtosNoCarrinho.forEach(produto => {
+      const comissao = 20;
+      const total = produto.preco + comissao;
+      totalGeral += total;
+
+      const item = document.createElement("div");
+      item.className = "carrinho-item";
+      item.innerHTML = `
+        <img src="${produto.imagem}" alt="${produto.nome}">
+        <div class="pedido-info">
+          <h3 class="nome-comida">${produto.nome}</h3>
+          <p class="detalhes-pedido">Restaurante: ${produto.restaurante}</p>
+          <p class="detalhes-pedido">Localização: ${produto.localizacao}</p>
+          <p class="detalhes-pedido">Pagamento: ${produto.pagamento}</p>
+          <p class="detalhes-pedido"><strong>Preço do prato:</strong> ${produto.preco} MT</p>
+          <p class="detalhes-pedido"><strong>Comissão da plataforma:</strong> ${comissao.toFixed(2)} MT</p>
+          <p class="detalhes-pedido" style="color: #e67e22;"><strong>Total:</strong> ${total.toFixed(2)} MT</p>
+        </div>
+      `;
+      carrinhoLista.appendChild(item);
+    });
+
+    totalGeralEl.textContent = totalGeral.toFixed(2) + " MT";
+  </script>
+
+</body>
+</html>

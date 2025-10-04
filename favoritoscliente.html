@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet"/>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  
+  <title>Kaya Restaurant</title>
+  <style>
+    /* Reset & base */
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #fafafa;
+      color: #333;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+      justify-content: center;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    ul {
+      list-style: none;
+    }
+
+    /* HEADER */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 70px;
+      background: #ff4c29;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 2rem;
+      z-index: 1100;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .logo {
+      font-weight: 800;
+      font-size: 1.6rem;
+      letter-spacing: 3px;
+      cursor: pointer;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    nav > * {
+      cursor: pointer;
+      position: relative;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    nav > *:hover {
+      color: #ffeae0;
+    }
+    .search-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .search-container input {
+      padding: 0.5rem 2.5rem 0.5rem 1rem;
+      border-radius: 25px;
+      border: none;
+      outline: none;
+      font-size: 0.95rem;
+      transition: box-shadow 0.3s ease;
+      width: 280px;
+    }
+    .search-container input:focus {
+      box-shadow: 0 0 8px #ff4c29aa;
+    }
+    .search-container svg {
+      position: absolute;
+      right: 10px;
+      width: 18px;
+      height: 18px;
+      fill: #ff4c29;
+      pointer-events: none;
+    }
+    .hero-content button {
+      position: relative;
+      padding: 13px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      outline: none;
+      margin: 0 auto;
+      border: none;
+      background: white;
+      transition: 1s;
+      overflow: hidden;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    .hero-content button:hover{
+       background var(--clr);
+       box-shadow: 0 0 10px var(--clr),
+                    0 0 30px var(--clr),
+                    0 0 60px var(--clr),
+                    0 0 100px var(--clr);
+      
+    }
+    .hero-content button::before{
+       content:'';
+       height: 400%;
+       width: 40px;
+       position: absolute;
+       background: var(--clr);
+       transition: 1s;
+       animation: animate 2s linear infinite;
+       animation-delay: calc (.33s * var(--i));
+      
+    }
+
+    .hero-content button:hover::before{
+        width:120%;             
+
+    }
+ 
+    @keyframes animate{
+        0%{
+            transform: rotate(0deg);
+        }
+
+        100%{
+            transform: rotate(360deg);
+        }
+    }
+
+    .hero-content button::after{
+        content:'';
+       inset: 4px;
+       position: absolute;
+       background: white;
+       transition: .5s;
+     
+    }
+
+    .hero-content button:hover::after{
+        background: var(--clr);
+
+    }
+    .hero-content button span {
+      position: relative;
+      font-size: 20px;
+      font-weight: 500;
+      color: black;
+      z-index: 1;
+      opacity: .8;
+      letter-spacing: 4px;
+      transition:.5s;
+    }
+
+    .hero-content button:hover span {
+      opacity:1;
+      color: white;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+     select {
+      padding: 0.6rem 1rem;
+      font-size: 1rem;
+      border-radius: 6px;
+      border: 1px solid #cbd5e1;
+      background: white;
+    }
+    .selector-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem 0;
+    }
+    .selector-container h2 {
+      font-size: 1.8rem;
+      color: #1f2937;
+      flex: 1;
+    }
+
+  
+
+    .icon-button,
+    .search-icon-button {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: orangered;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    /* Mobile menu */
+    @media (max-width: 768px) {
+      .search-container input {
+        width: 140px;
+      }
+      nav {
+        position: fixed;
+        top: 70px;
+        right: -100%;
+        height: calc(100vh - 70px);
+        width: 220px;
+        background: #ff4c29;
+        flex-direction: column;
+        padding: 2rem 1rem;
+        gap: 1.8rem;
+        transition: right 0.35s ease;
+        z-index: 1200;
+      }
+      nav.active {
+        right: 0;
+      }
+      .menu-toggle {
+        display: flex;
+        position: absolute;
+        right: 20px;
+        top: 15px;
+      }
+    }
+
+    /* HERO */
+    .hero {
+      margin-top: 70px;
+      height: 500px;
+      background:  url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1470&q=80') center/cover no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+      padding: 0 1rem;
+      position: relative;
+      overflow: hidden;
+      clip-path:polygon(0 0, 100% 0, 100% 85%, 0 100%);
+    }
+    .hero-content {
+      max-width: 700px;
+      transform-style: preserve-3d;
+    }
+    .hero-content h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      letter-spacing: 2px;
+      animation: fadeInUp 1s ease forwards;
+      opacity: 0;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+    .hero-content p {
+      font-weight: 300;
+      font-size: 1.3rem;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeInUp 1s ease forwards;
+      animation-delay: 0.3s;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+    
+    .hero-content button:hover {
+      background: #ff4c29;
+      color: white;
+    }
+
+    .slideshow-contain {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      margin: 20px auto;
+      overflow: hidden;
+      border-radius: 16px;
+     
+      aspect-ratio: 16 / 9;
+    }
+    .slide {
+      display: none;
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+    
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(60%);
+    }
+    .text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: white;
+      padding: 20px 30px;
+      
+      border-radius: 8px;
+    }
+    .prev, .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      padding: 16px;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      transition: 0.3s;
+    }
+    .next {
+      right: 0;
+    }
+    
+
+    #como {
+      padding: 2rem 0;
+    }
+    #como h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    /* Scroll animation */
+    @keyframes fadeInUp {
+      0% {opacity: 0; transform: translateY(30px);}
+      100% {opacity: 1; transform: translateY(0);}
+    }
+
+    /* RESTAURANTES - Scroll Horizontal */
+    .restaurants-section {
+      padding: 3rem 1rem 5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .restaurants-section h2 {
+      font-weight: 800;
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #222;
+      letter-spacing: 1.5px;
+    }
+    .restaurant-scroll {
+      display: flex;
+      gap: 1.8rem;
+     
+      padding-bottom: 0.5rem;
+    }
+    
+    /* Card Torto */
+    .restaurant-card {
+      background: white;
+      flex: 0 0 320px;
+      border-radius: 35px 10px 35px 10px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+    .restaurant-card:hover {
+      transform: translateY(-12px) rotate(-1.5deg);
+     
+      z-index: 10;
+    }
+    .restaurant-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 35px 10px 0 0;
+      transition: transform 0.4s ease;
+    }
+    .restaurant-card:hover .restaurant-img {
+      transform: scale(1.1);
+    }
+    .restaurant-content {
+      padding: 1.5rem 1.6rem 2rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .restaurant-name {
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 0.3rem;
+      color: #ff4c29;
+      letter-spacing: 0.5px;
+    }
+    .restaurant-details {
+      font-size: 0.95rem;
+      color: #555;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+      font-weight: 500;
+    }
+    .restaurant-rating {
+      color: #f1c40f;
+      font-size: 1.15rem;
+      margin-bottom: 1rem;
+      letter-spacing: 2px;
+      user-select: none;
+    }
+    .btn-order {
+      background: red;
+      border: none;
+      color: white;
+      padding: 0.7rem 1.7rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      align-self: flex-start;
+      cursor: pointer;
+      box-shadow: 0 6px 15px rgba(255, 76, 41, 0.6);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+    .btn-order:hover {
+      background: #d43f20;
+      box-shadow: 0 9px 25px rgba(212, 63, 32, 0.9);
+    }
+
+    /* Footer */
+    footer {
+      background: #222;
+      color: #ddd;
+      text-align: center;
+      padding: 2rem 1rem;
+      font-weight: 400;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+    }
+
+    .footer-col h4 {
+      font-size: 1.7rem;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+
+    .social-icons {
+     display: flex;
+     align-items: center;
+     gap: 20px;
+     justify-content: center;
+    }
+
+    .social-icons a {
+     text-decoration: none;
+     width: 45px;
+     height: 45px;
+     border-radius:50%;
+     font-size:20px;
+     border: 3px solid white;
+     color: white;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     cursor: pointer;
+     transition: all 0.5s ease;
+    }
+
+    .social-icons a:hover:first-child {
+      color: blue;
+      border: 3px solid blue;
+      box-shadow: 0 0 25px blue; 
+    }
+
+    .social-icons a:hover:nth-child(2) {
+      color:#ee2a7b;
+      border: 3px solid #ee2a7b;
+      box-shadow: 0 0 25px #ee2a7b; 
+    }
+
+    .social-icons a:hover:nth-child(3) {
+      color: black;
+      border: 3px solid black;
+      box-shadow: 0 0 25px black; 
+    }
+
+    /* Responsivo */
+    @media (max-width: 768px) {
+      .hero {
+        height: 500px;
+      }
+      .hero-content h1 {
+        font-size: 2.3rem;
+      }
+      .hero-content p {
+        font-size: 1rem;
+      }
+      .restaurant-card {
+        flex: 0 0 280px;
+      }
+      .search-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .search-container input {
+      padding: 0.5rem 2.5rem 0.5rem 1rem;
+      border-radius: 25px;
+      border: none;
+      outline: none;
+      font-size: 0.95rem;
+      transition: box-shadow 0.3s ease;
+      width: 200px;
+    }
+      nav {
+        gap: 1rem;
+      }
+      nav input {
+        width: 120px;
+      }
+       .slideshow-contain {
+        aspect-ratio: 12 / 7;
+        height: 400px;
+      }
+    .text {
+    padding: 10px 15px;
+    max-width: 90%;
+    font-size: 0.9rem; 
+  }
+  .text h1 {
+    font-size: 1.3rem; 
+    line-height: 1.3;
+  }
+  .text p {
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+    }
+
+    .topbar {
+    background-color: #222;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* espaço entre logo e botão */
+  }
+
+  .icone{
+    font-size: 16px;
+  }
+  .menu-botn {
+    font-size: 28px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .topbar h1 {
+    margin: 0;
+    font-size: 20px;
+  }
+
+  /* Sidebar (menu lateral) - começa escondido à esquerda */
+  .sidebar {
+    height: 100vh;
+    width: 250px;
+    background-color: #222; ;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: -250px; /* escondido à esquerda */
+    transition: left 0.3s ease;
+    padding-top: 60px; /* espaço para topbar */
+    box-sizing: border-box;
+    z-index: 1000;
+  
+  }
+
+  /* Quando ativo, fica visível */
+  .sidebar.active {
+    left: 0;
+  }
+
+  /* Itens do menu com ícones */
+  .sidebar a {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+    border-bottom: 1px solid #444;
+  }
+  .sidebar a:hover {
+    background-color: #d43f20;
+  }
+  /* Ícones simples com emoji só pra demo */
+  .sidebar a .icon {
+    margin-right: 15px;
+    font-size: 22px;
+  }
+
+  .sidebar.active ~ .contentp {
+    margin-right: 250px;
+  }
+ 
+  .sidebar ul li:hover a.icone,
+  .sidebar ul li:hover a.texto{
+    color: var(--bg);
+  }
+
+  .texto{
+    font-size: 19px;
+    color:#d43f20;
+  }
+  
+  .logotipo {
+      display:flex; flex-direction:column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .logotipo img {
+      height: 50px;
+      margin-right: 10px;
+    }
+  i {
+    margin-right: 3px;
+  }
+  /* Esconde o botão no desktop e sidebar também */
+  @media (min-width: 769px) {
+    .menu-botn {
+      display: none;
+    }
+    .sidebar {
+      display: none;
+    }
+    
+
+  }
+  
+   .like-btn {
+    background: none;
+    border: none;
+    color: #888;
+    font-size: 18px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+
+  .like-btn.liked {
+    color: red;
+  }
+
+  .restaurant-line{
+    display:flex;
+    gap:100px;
+  }
+
+  .restaurant-info {
+      padding: 2rem;
+      text-align: center;
+      background: #fff8f5;
+    }
+
+    .restaurant-info h1 {
+      font-size: 2.2rem;
+      color: #ff4c29;
+    }
+
+    .menu-categorias {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin: 1rem 0;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .categoria-item {
+      font-size: 16px;
+      font-weight: 500;
+      color: #555;
+      cursor: pointer;
+      padding: 0.2rem;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s ease;
+    }
+
+    .categoria-item.active {
+      border-bottom: 2px solid #d43f20;
+      color: #000;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 1rem;
+    }
+
+    .filter-btn {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 30px;
+      background: #ddd;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .filter-btn.active, .filter-btn:hover {
+      background: #ff4c29;
+      color: white;
+    }
+
+    .products-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-6px);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .product-content {
+      padding: 1rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .product-title {
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .product-desc {
+      font-size: 0.95rem;
+      color: #555;
+      margin-bottom: 1rem;
+    }
+
+    .product-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .price {
+      font-weight: 700;
+      color: #ff4c29;
+      font-size: 1.1rem;
+    }
+
+    .btn-add {
+      background: red;
+      border: none;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+
+    .btn-add:hover {
+      background: #d43f20;
+    }
+
+    @media (max-width: 600px) {
+      .restaurant-info h1 {
+        font-size: 1.5rem;
+      }
+            .menu-categorias {
+        gap: 1rem;
+        font-size: 14px;
+    }
+  }
+
+  
+
+  </style>
+</head>
+<body>
+<div class="top-bar">
+<header>
+  <div class="rand" style ="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size:30px;"><b>Kaya Restaurant</b></div>
+  <div class="menu-botn" id="menu-botn">&#9776;</div> <!-- botão à direita -->
+
+  <nav aria-label="Menu principal">
+    <div class="search-container">
+      <input type="search" placeholder="Pesquisar pratos ou restaurantes..." aria-label="Pesquisar" />
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M21 21l-6-6m2-5a7 7 0 1 1-14 0 7 7 0 0 1 14 0z" stroke="#ff4c29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+    </div>
+    
+    <div class="icon-button" title="Login"><i class="fas fa-user"></i></div>
+    <div class="icon-button" title="Fazer Compras"><i class="fas fa-shopping-bag"></i></div>
+  </nav>
+
+</div>
+  
+  <div class="sidebar" id="sidebar"> <br>
+    <li class ="logotipo">
+      
+        <img src="c:\Users\louis\OneDrive\Ambiente de Trabalho\Site DA\WhatsApp Image 2025-02-20 at 17.30.33-fotor-20250617144948.png" alt="Logo DA" class="logo" alt="Dondza Abroad">
+          <div class = "texto">KAYA RESTAURANT</div> <br><br>
+
+          <div class="search-container">
+            <input type="search" placeholder="Pesquisar pratos ou restaurantes..." aria-label="Pesquisar" />
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M21 21l-6-6m2-5a7 7 0 1 1-14 0 7 7 0 0 1 14 0z" stroke="#ff4c29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </svg>
+          </div>
+  
+    </li> <br><br>
+    <a href="#">
+      <i class="bx bx-home-alt"></i>
+        <span class="icone"> Página Principal</span>
+      </a>
+
+        <a href="#">
+          <i class="bx bx-user"></i>
+            <span class="icone"> Perfil</span>
+          </a>
+
+            <a href="#">
+              <i class="bx bx-bell"></i>
+                <span class="icone"> Notificações</span>
+              </a>
+
+                <a href="#">
+                  <i class="bx bx-heart"></i>
+                    <span class="icone"> Favoritos</span>
+                  </a>
+
+                    <a href="#">
+                      <i class="bx bx-cart-alt"></i>
+                        <span class="icone"> Carrinho</span>
+                      </a>
+
+                        <a href="#">
+                          <i class="bx bx-cog"></i>
+                            <span class="icone"> Configurações</span>
+                          </a>
+  
+  </div>
+  
+</header>
+
+<div class = "contentp"> <br><br><br><br><br>
+<main>
+    <section class="restaurants-section" aria-label="Lista de restaurantes parceiros">
+    <h2>Restaurantes Favoritos</h2>
+     <div class="restaurant-scroll" tabindex="0" role="list">
+     <article class="restaurant-card" role="listitem" tabindex="0" aria-label="Restaurante: Grill Master, tempo 20-25 minutos, preço médio 320 meticais">
+        <img src="https://images.unsplash.com/photo-1555992336-03a23c7f6b6b?auto=format&fit=crop&w=600&q=80" alt="Prato do restaurante Grill Master" class="restaurant-img" />
+        <div class="restaurant-content">
+          <h3 class="restaurant-name">Grill Master</h3>
+           <div class="restaurant-rating" aria-label="Avaliação: 4 estrelas">★★★★☆</div>
+           <div class="restaurant-line">
+          <p class="restaurant-details" style="color:green"><span><b>Churrascaria</b></span></p> 
+         </div>
+          <p class="restaurant-details"> <i class="fas fa-map-marker-alt"></i>Av.Karl Marx  </p> 
+          <p class="restaurant-details"> <i class="fas fa-tags"></i>Preço mínimo: 320 MT</p> <br>
+          <button class="btn-order" aria-label="Fazer pedido no Grill Master">Remover</button>
+        </div>
+      </article>
+   
+
+
+   
+     <div class="restaurant-scroll" >
+ <article class="restaurant-card" role="listitem" tabindex="0" aria-label="Restaurante: Grill Master, tempo 20-25 minutos, preço médio 320 meticais">
+        <img src="https://images.unsplash.com/photo-1555992336-03a23c7f6b6b?auto=format&fit=crop&w=600&q=80" alt="Prato do restaurante Grill Master" class="restaurant-img" />
+        <div class="restaurant-content">
+          <h3 class="restaurant-name">Grill Master</h3>
+           <div class="restaurant-rating" aria-label="Avaliação: 4 estrelas">★★★★☆</div>
+           <div class="restaurant-line">
+          <p class="restaurant-details" style="color:green"><span><b>Churrascaria</b></span></p> 
+          </div>
+          <p class="restaurant-details"> <i class="fas fa-map-marker-alt"></i>Av.Karl Marx  </p> 
+          <p class="restaurant-details"> <i class="fas fa-tags"></i>Preço mínimo: 320 MT</p> <br>
+          <button class="btn-order" aria-label="Fazer pedido no Grill Master">Remover</button>
+        </div>
+      </article>
+   
+  </section>
+ <h2 style="text-align:center; font-size:36px;" >Pratos Favoritos</h2>
+  <section class="products-container" id="productList">
+   
+  <div class="product-card churrasco">
+    <img src="https://images.unsplash.com/photo-1605470201596-c8fce4af0f93?auto=format&fit=crop&w=600&q=80" alt="Churrasco">
+    <div class="product-content">
+      <div class="product-title">Churrasco Completo</div>
+      <div class="product-desc">Acompanhado de arroz, salada e molho.</div>
+      <br>
+      <div class="product-footer">
+        <span class="price">350 MT</span>
+        <button class="btn-add">Remover</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card pizza">
+    <img src="https://images.unsplash.com/photo-1542281286-9e0a16bb7366?auto=format&fit=crop&w=600&q=80" alt="Pizza">
+    <div class="product-content">
+      <div class="product-title">Pizza Marguerita</div>
+      <div class="product-desc">Com molho de tomate e manjericão fresco.</div>
+       <br>
+      <div class="product-footer">
+        <span class="price">280 MT</span>
+        <button class="btn-add">Remover</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card bebida">
+    <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=600&q=80" alt="Coca-Cola">
+    <div class="product-content">
+      <div class="product-title">Coca-Cola 500ml</div>
+      <div class="product-desc">Bebida gelada.</div>
+     <br>
+      <div class="product-footer">
+        <span class="price">70 MT</span>
+        <button class="btn-add">Remover</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card sobremesa">
+    <img src="https://images.unsplash.com/photo-1613145991414-7df9f8df4e88?auto=format&fit=crop&w=600&q=80" alt="Sobremesa">
+    <div class="product-content">
+      <div class="product-title">Mousse de Chocolate</div>
+      <div class="product-desc">Sobremesa cremosa feita com chocolate belga.</div>
+        <br>
+      <div class="product-footer">
+        <span class="price">100 MT</span>
+        <button class="btn-add">Remover</button>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+</main>
+
+<br> <br> <br>
+
+<footer>
+  <div class="footer-main">
+    <div class="footer-col">
+      <h4>Kaya Restaurant</h4>
+      <p> <i>Tua refeição a tempo e hora.</i></p> <br> <br>
+      <p><strong>Local:</strong> Moçambique – Maputo</p> <br>
+      <p><strong>Email:</strong> kayarestaurant@gmail.com</p> <br>
+      <p><strong>Contactos:</strong><br>+258 875024506 <br>+258 845250714 </p> <br>
+    </div> <br>
+    <div class="footer-col">
+      <h4>Siga-nos</h4> 
+      <div class="social-icons">
+        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/kwetobread.mz?igsh=MW1jY2F6Z2R6aGFvcg=="><i class="fa-brands fa-instagram"></i></a>
+        <a href="#"><i class="fa-brands fa-tiktok"></i></a> 
+      </div>
+    </div>
+  </div>
+  <div class="footer-legal">
+    <br><p>
+      <a href="termos.html">Termos e Condições</a> | 
+      <a href="politicapriv.html">Política de Privacidade</a> | 
+      <a href="politicaentrega.html">Política de Entrega e Devolução</a>
+    </p> <br>
+    <p>© 2025 KAYARESTAURANT. Todos os direitos reservados. Desenvolvido por [empresa de web].</p>
+    
+  </div>
+</div>
+</footer>
+
+<script>
+  // Sidebar toggle
+  const menuBotn = document.getElementById('menu-botn');
+  const sidebar = document.getElementById('sidebar');
+
+  menuBotn.addEventListener('click', () => {
+    sidebar.classList.toggle('active');
+  });
+
+  // Fecha sidebar se clicar fora dela
+  document.addEventListener('click', (e) => {
+    if (!sidebar.contains(e.target) && !menuBotn.contains(e.target)) {
+      sidebar.classList.remove('active');
+    }
+  });
+
+
+  
+   
+</script>

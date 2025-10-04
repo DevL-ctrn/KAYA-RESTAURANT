@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cadastro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      background: url('https://img.freepik.com/premium-photo/restaurant-food-restaurant-menu-photos-menu_830198-1091.jpg?w=1480') no-repeat center center/cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .form-container {
+      background: #d43f20;
+      padding: 40px 30px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      width: 360px;
+      color: #fff;
+    }
+
+    .form-container h2 {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .input-field {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .input-field input {
+      width: 100%;
+      padding: 12px 40px 12px 12px;
+      border: none;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      outline: none;
+    }
+
+    .input-field input::placeholder {
+      color: #fff;
+      opacity: 0.7;
+    }
+
+    .input-field i {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #fff;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 12px;
+      background: #fff;
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .submit-btn:hover {
+      background: #e0e0e0;
+    }
+
+    .back-link {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .back-link a {
+      color: #fff;
+      text-decoration: underline;
+      font-weight: bold;
+    }
+
+    input[type="file"] {
+      padding: 8px;
+      background: #d43f20;
+      border-radius: 8px;
+      color: #fff;
+    }
+
+    input[type="file"]::-webkit-file-upload-button {
+      background: #fff;
+      color: #000;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    input[type="file"]::file-selector-button {
+      background: #fff;
+      color: #000;
+      padding: 7px 10px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>Criar Conta</h2>
+
+    <div class="input-field">
+      <input type="text" placeholder="Nome completo" required />
+      <i class="fa fa-user"></i>
+    </div>
+
+    <div class="input-field">
+      <input type="email" placeholder="Email" required />
+      <i class="fa fa-envelope"></i>
+    </div>
+
+    <div class="input-field">
+      <input type="password" placeholder="Senha" required />
+      <i class="fa fa-lock"></i>
+    </div>
+
+    <div class="input-field">
+      <input type="password" placeholder="Confirmar senha" required />
+      <i class="fa fa-lock"></i>
+    </div>
+
+    
+    <div class="input-field">
+      <input type="file" accept="image/*" required />
+    </div>
+
+    <button class="submit-btn">Cadastrar</button>
+
+    <div class="back-link">
+      Já tem uma conta? <a href="logincliente.html">Login</a>
+    </div>
+  </div>
+
+</body>
+</html>
