@@ -348,7 +348,7 @@
       100% {opacity: 1; transform: translateY(0);}
     }
 
-    /* RESTAURANTES - Scroll Horizontal */
+   /* RESTAURANTES - Scroll Horizontal */
     .restaurants-section {
       padding: 3rem 1rem 5rem;
       max-width: 1200px;
@@ -365,10 +365,23 @@
     .restaurant-scroll {
       display: flex;
       gap: 1.8rem;
-     
+      overflow-x: auto;
       padding-bottom: 0.5rem;
+      scroll-padding: 1rem;
+      scroll-behavior: smooth;
     }
-    
+    .restaurant-scroll::-webkit-scrollbar {
+      height: 8px;
+    }
+    .restaurant-scroll::-webkit-scrollbar-track {
+      background: #eee;
+      border-radius: 10px;
+    }
+    .restaurant-scroll::-webkit-scrollbar-thumb {
+      background: #ff4c29cc;
+      border-radius: 10px;
+    }
+
     /* Card Torto */
     .restaurant-card {
       background: white;
@@ -1051,4 +1064,5 @@
   
    
 </script>
+
 
