@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dashboard do Restaurante</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
   <style>
     * {
@@ -317,19 +318,29 @@
       <br>
       
     </div>
-      <h2><i class="fas fa-bread-slice" style="text-align:center;"></i> Meu Restaurante</h2>
-      <a href="dashboard.html"><i class="fas fa-home"></i> Painel Principal</a>
-      <a href="menupedidos.html"><i class="fas fa-list"></i> Menu de Pedidos</a>
-      <a href="pedidos.html"><i class="fas fa-users"></i> Pedidos dos Clientes</a>
-      <a href="cronometro.html"><i class="fas fa-clock"></i> Cronômetro</a>
-      <a href="notificacoes.html"><i class="fas fa-clock"></i> Notificações</a>
-      <a href="pagamento.html"><i class="fas fa-money-bill-wave"></i> Pagamentos</a>
-      <a href="configuracoes.html"><i class="fas fa-cog"></i> Configurações</a>
+      <h2 style= "text-align:center;"> Meu Restaurante</h2>
+      <a href="dashboard.html"> <i class="bx bx-home"></i>
+        <span class="icone"> Página Principal</span> </a>
+      <a href="menupedidos.html"> <i class="bx bxs-cart"></i>
+        <span class="icone"> Menu de Pedidos</span>  </a>
+      <a href="pedidos.html"><i class="bx bxs-group"></i>
+        <span class="icone"> Pedidos dos Clientes</span> </a>
+      <a href="cronometro.html"><i class="bx bxs-time"></i>
+        <span class="icone"> Tempo de Preparo</span></a>
+      <a href="notificacoes.html"><i class="bx bxs-bell"></i>
+        <span class="icone"> Notificações</span></a>
+      <a href="pagamento.html"><i class="bx bxs-credit-card"></i>
+        <span class="icone"> Pagamentos</span> </a>
+      <a href="subscription.html"><i class="bx bxs-id-card"></i>
+        <span class="icone"> Subscrição</span> </a>
+      <a href="configuracoes.html"><i class="bx bxs-cog"></i>
+        <span class="icone"> Configurações</span>  </a>
     </aside>
     <main class="main">
       <div class="header">
         <h1>Painel do Restaurante</h1>
-        <button class="logout">Terminar Sessão</button>
+        <a href="index.html">
+        <button class="logout">Terminar Sessão</button></a>
       </div>
       <div class="cards">
         <div class="card"><h3>Pedidos de Hoje</h3><p>234</p></div>
@@ -438,4 +449,5 @@
     }
   </script>
 </body>
+
 </html>
