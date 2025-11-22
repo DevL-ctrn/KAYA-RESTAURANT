@@ -2,7 +2,7 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Login</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
@@ -16,7 +16,7 @@
 
     body {
       height: 100vh;
-      background: url('https://img.freepik.com/premium-photo/restaurant-food-restaurant-menu-photos-menu_830198-1091.jpg?w=1480')center/cover no-repeat;
+     background: url('https://img.freepik.com/premium-photo/restaurant-food-restaurant-menu-photos-menu_830198-1091.jpg?w=1480')center/cover no-repeat;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -24,29 +24,76 @@
 
     .login-container {
       background: #d43f20;
-      padding: 40px 20px;
+      padding: 40px 20px 30px;
       border-radius: 16px;
       border: 1px solid rgba(255, 255, 255, 0.2);
-      width: 320px;
+      width: 340px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     }
 
     .login-container h2 {
       text-align: center;
       color: #fff;
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #e6e6e6;
+      font-weight: 500;
+      font-size: 10px;
       margin-bottom: 25px;
     }
 
+    /* Toggle buttons container */
+    .toggle-access {
+      display: flex;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 30px;
+      overflow: hidden;
+      margin-bottom: 30px;
+      border: 1px solid rgba(255,255,255,0.3);
+      user-select: none;
+    }
+
+    .toggle-access button {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: #fff;
+      padding: 10px 0;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: background-color 0.3s, color 0.3s;
+      position: relative;
+      z-index: 2;
+    }
+
+    .toggle-access button svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+
+    .toggle-access button.active {
+      background: #fff;
+      color: #d43f20;
+      font-weight: 700;
+      z-index: 3;
+      box-shadow: 0 0 10px #ff5722aa;
+    }
+
+    /* Inputs */
     .input-field {
       position: relative;
       margin-bottom: 20px;
     }
-
-    
-    .input-field input::placeholder {
-      color: #fff;
-      opacity: 0.7;
-    }
-
 
     .input-field input {
       width: 100%;
@@ -56,6 +103,13 @@
       background: rgba(255, 255, 255, 0.2);
       color: #fff;
       outline: none;
+      font-weight: 500;
+      font-size: 14px;
+      transition: background-color 0.3s;
+    }
+    .input-field input::placeholder {
+      color: #fff;
+      opacity: 0.7;
     }
 
     .input-field i {
@@ -64,81 +118,148 @@
       top: 50%;
       transform: translateY(-50%);
       color: #fff;
+      pointer-events: none;
+      font-size: 18px;
     }
 
+    /* Options */
     .options {
       display: flex;
       justify-content: space-between;
       font-size: 14px;
       color: #fff;
       margin-bottom: 20px;
+      user-select: none;
     }
-
+    .options label {
+      cursor: pointer;
+      user-select: none;
+    }
     .options a {
       color: #fff;
       text-decoration: none;
+      transition: color 0.3s;
+    }
+    .options a:hover {
+      color: #ffb399;
     }
 
+    /* Button */
     .login-btn {
       width: 100%;
       padding: 12px;
-      background: #fff;
-      color: #000;
+      background: #ff5200;
+      color: #fff;
       border: none;
       border-radius: 8px;
-      font-weight: bold;
+      font-weight: 700;
       cursor: pointer;
-      transition: 0.3s;
+      transition: background-color 0.3s;
+      font-size: 15px;
+      box-shadow: 0 4px 15px #ff5200aa;
     }
-
     .login-btn:hover {
-      background: #e0e0e0;
+      background: #e04b00;
+      box-shadow: 0 4px 15px #e04b00cc;
     }
 
+    /* Register */
     .register {
       margin-top: 20px;
       text-align: center;
       color: #fff;
       font-size: 14px;
     }
-
     .register a {
       color: #fff;
-      font-weight: bold;
+      font-weight: 700;
       text-decoration: underline;
+      transition: color 0.3s;
     }
-     h3 {
-      color: goldenrod;
-      font-weight: bold;
-      text-align:center;
-      font-size:13px;
+    .register a:hover {
+      color: #ffb399;
     }
   </style>
 </head>
 <body>
 
-  <div class="login-container">
-    <h2>Login</h2>
-    <h3>Faça o seu login sendo cliente ou restaurante.</h2> <br>
-    <div class="input-field">
-      <input type="email" placeholder="Email" required>
-      <i class="fa fa-envelope"></i>
+  <div class="login-container" role="main" aria-label="Formulário de login">
+    <h2>Bem-vindo de volta</h2>
+    <p class="subtitle">Escolha o tipo de acesso para continuar</p>
+
+    <div class="toggle-access" role="tablist" aria-label="Selecionar tipo de acesso">
+      <button id="restaurante-tab" class="active" role="tab" aria-selected="true" aria-controls="restaurante-panel" tabindex="0">
+        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M8 2v20h2v-7h4v7h2V2z"/></svg> Restaurante
+      </button>
+      <button id="cliente-tab" role="tab" aria-selected="false" aria-controls="cliente-panel" tabindex="-1">
+        <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M6 21v-1a6 6 0 0 1 12 0v1"/></svg> Cliente
+      </button>
     </div>
-    <div class="input-field">
-      <input type="password" placeholder="Palavra-passe" required>
-      <i class="fa fa-lock"></i>
-    </div>
-    <div class="options">
-      <label><input type="checkbox"> Lembrar-me</label>
-      <a href="#">Esqueceu a senha?</a> 
-    </div><br>
-    <button class="login-btn">Login</button> <br>
-  
+
+    <form id="login-form" autocomplete="off" aria-live="polite">
+      <div class="input-field">
+        <input type="email" id="email" name="email" placeholder="seu@email.com" required aria-required="true" aria-describedby="email-desc" />
+        <i class="fa fa-envelope" aria-hidden="true"></i>
+      </div>
+      <div class="input-field">
+        <input type="password" id="password" name="password" placeholder="Senha" required aria-required="true" aria-describedby="password-desc" />
+        <i class="fa fa-lock" aria-hidden="true"></i>
+      </div>
+
+      <div class="options">
+        <label for="remember">
+          <input type="checkbox" id="remember" name="remember" />
+          Lembrar-me
+        </label>
+        <a href="#" tabindex="0">Esqueceu a senha?</a>
+      </div>
+
+      <button type="submit" class="login-btn" id="login-button">Entrar como Restaurante</button>
+    </form>
+
     <div class="register">
-       <a href="index.html">Voltar a página principal</a>
+      Não tem uma conta? <a href="#" tabindex="0">Criar conta</a>
     </div>
   </div>
 
-</body>
+  <script>
+    const restauranteTab = document.getElementById('restaurante-tab');
+    const clienteTab = document.getElementById('cliente-tab');
+    const loginButton = document.getElementById('login-button');
 
+    function setActiveTab(tab) {
+      if (tab === 'restaurante') {
+        restauranteTab.classList.add('active');
+        restauranteTab.setAttribute('aria-selected', 'true');
+        restauranteTab.setAttribute('tabindex', '0');
+
+        clienteTab.classList.remove('active');
+        clienteTab.setAttribute('aria-selected', 'false');
+        clienteTab.setAttribute('tabindex', '-1');
+
+        loginButton.textContent = 'Entrar como Restaurante';
+      } else {
+        clienteTab.classList.add('active');
+        clienteTab.setAttribute('aria-selected', 'true');
+        clienteTab.setAttribute('tabindex', '0');
+
+        restauranteTab.classList.remove('active');
+        restauranteTab.setAttribute('aria-selected', 'false');
+        restauranteTab.setAttribute('tabindex', '-1');
+
+        loginButton.textContent = 'Entrar como Cliente';
+      }
+    }
+
+    restauranteTab.addEventListener('click', () => setActiveTab('restaurante'));
+    clienteTab.addEventListener('click', () => setActiveTab('cliente'));
+
+    // Submissão do formulário - só um exemplo, sem backend
+    document.getElementById('login-form').addEventListener('submit', e => {
+      e.preventDefault();
+      alert(`Login como ${restauranteTab.classList.contains('active') ? 'Restaurante' : 'Cliente'} com email: ${document.getElementById('email').value}`);
+    });
+  </script>
+</body>
 </html>
+
